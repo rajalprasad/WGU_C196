@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.TermEdit"
+    tools:showIn="@layout/activity_term_edit">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/term_edit_title"
+            android:layout_margin="@dimen/text_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:hint="Edit Title"
+            android:inputType="textCapWords"/>
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/term_edit_start_date"
+            android:layout_margin="@dimen/text_margin"
+            android:hint="Start Date"
+            android:inputType="date"
+            app:layout_constraintEnd_toStartOf="@id/term_edit_start_date_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/term_edit_title"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="36dp"
+            android:minHeight="36dp"
+            android:id="@+id/term_edit_start_date_button"
+            android:background="@drawable/ic_date_range_black_24dp"
+            android:layout_margin="@dimen/text_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/term_edit_title"/>
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/term_edit_end_date"
+            android:hint="End Date"
+            android:inputType="date"
+            app:layout_constraintTop_toBottomOf="@+id/term_edit_start_date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/term_edit_end_date_button"
+            android:layout_margin="@dimen/text_margin"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="36dp"
+            android:minHeight="36dp"
+            android:id="@+id/term_edit_end_date_button"
+            android:layout_margin="@dimen/text_margin"
+            android:background="@drawable/ic_date_range_black_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/term_edit_start_date_button"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

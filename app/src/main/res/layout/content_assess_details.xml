@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.AssessmentDetails">
+
+    <TextView
+        android:id="@+id/assess_details_date_label"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:layout_margin="@dimen/text_margin"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/assess_details_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:text="Date"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintStart_toEndOf="@id/assess_details_date_label"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <TextView
+        android:id="@+id/assess_details_type_label"
+        android:layout_width="@dimen/details_label_width"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:text="Type"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/assess_details_date_label"/>
+    <TextView
+        android:id="@+id/assess_details_type"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:text="Performance Assessment"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintTop_toBottomOf="@id/assess_details_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/assess_details_type_label"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

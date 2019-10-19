@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.MentorDetails">
+    <TextView
+        android:id="@+id/mentor_details_email_address_label"
+        android:layout_width="@dimen/details_label_width"
+        android:layout_height="wrap_content"
+        android:text="Email address"
+        android:layout_margin="@dimen/text_margin"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+        android:id="@+id/mentor_detail_email_address"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:text="Mentor email address"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintStart_toEndOf="@id/mentor_details_email_address_label"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <TextView
+        android:id="@+id/mentor_details_phone_number_label"
+        android:layout_width="@dimen/details_label_width"
+        android:layout_height="wrap_content"
+        android:text="Mentor phone number"
+        android:layout_margin="@dimen/text_margin"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mentor_details_email_address_label"/>
+    <TextView
+        android:id="@+id/mentor_details_phone_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:text="Mentors phone number"
+        android:textSize="@dimen/text_size"
+        app:layout_constraintStart_toEndOf="@id/mentor_details_phone_number_label"
+        app:layout_constraintTop_toBottomOf="@+id/mentor_details_email_address_label"
+        app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
