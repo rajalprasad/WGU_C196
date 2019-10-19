@@ -2,19 +2,19 @@ package com.example.wgu_c196.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.wgu_c196.R;
 import com.example.wgu_c196.model.mCourse;
+import com.example.wgu_c196.utilities.TextFormatter;
+import com.example.wgu_c196.view.CourseDetails;
+import com.example.wgu_c196.view.CourseEdit;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -22,14 +22,16 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.wgu_c196.utilities.Constants.COURSEIDKEY;
+
 public class CAdapter extends RecyclerView.Adapter<CAdapter.VHolder> {
-    private final List<mCourse> mCourses;
+    private final List<mCourse> crses;
     private final Context context;
     private final RecContext recContext;
     private CSelectedListener cSelectedListener;
 
     public CAdapter(List<mCourse> courses, Context context, RecContext recyclerContext, CSelectedListener cSelectedListener) {
-        this.mCourses = courses;
+        this.crses = courses;
         this.context = context;
         this.recContext = recyclerContext;
         this.cSelectedListener = cSelectedListener;
@@ -47,7 +49,7 @@ public class CAdapter extends RecyclerView.Adapter<CAdapter.VHolder> {
         @BindView(R.id.course_list_cv_image_btn)
         ImageButton courseImageButton;
         CSelectedListener cSelectedListener;
-        public VHolder(View itmView, CSelectedListener cSelectedListener) {
+        private VHolder(View itmView, CSelectedListener cSelectedListener) {
             super(itmView);
             ButterKnife.bind(this, itmView);
             this.cSelectedListener = cSelectedListener;
@@ -56,8 +58,12 @@ public class CAdapter extends RecyclerView.Adapter<CAdapter.VHolder> {
         }
         @Override
         public void onClick(View v) {
-            cSelectedListener.onCSelected(getAdapterPosition(), mCourses.get(getAdapterPosition()));
+            cSelectedListener.onCSelected(getAdapterPosition(), crses.get(getAdapterPosition()));
         }
+    }
+    @Override
+    public int getItemCount() {
+        return crses.size();
     }
     @NonNull
     @Override
@@ -66,35 +72,31 @@ public class CAdapter extends RecyclerView.Adapter<CAdapter.VHolder> {
         View view = inflater.inflate(R.layout.course_list_cv, parent, false);
         return new VHolder(view, cSelectedListener);
     }
-    //TODO
     @Override
-    public void onBindViewHolder(@NonNull CourseAdapter.ViewHolder holder, int position) {
-        final Course course = mCourses.get(position);
-        holder.tvTitle.setText(course.getTitle());
-        String startAndEnd = TextFormatting.cardDateFormat.format(course.getStartDate()) + " to " + TextFormatting.cardDateFormat.format(course.getAnticipatedEndDate());
-        holder.tvDates.setText(startAndEnd);
-
-        switch(rContext) {
+    public void onBindViewHolder(@NonNull CAdapter.VHolder holdr, int posit) {
+        final mCourse crse = crses.get(posit);
+        holdr.textViewTitle.setText(crse.getTitle());
+        String sAndEnd = TextFormatter.crdDateFrmat.format(crse.getStrtDate()) + " to " + TextFormatter.crdDateFrmat.format(crse.getEndDate());
+        holdr.textViewDates.setText(sAndEnd);
+        switch(recContext) {
             case MAIN:
-                Log.v("rContext", "rContext is " + rContext.name());
-                holder.courseFab.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_edit));
-                holder.courseImageBtn.setOnClickListener(v -> {
-                    Intent intent = new Intent(mContext, CourseDetailsActivity.class);
-                    intent.putExtra(COURSE_ID_KEY, course.getId());
-                    mContext.startActivity(intent);
+                holdr.courseFab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_edit_black_24dp));
+                holdr.courseImageButton.setOnClickListener(v -> {
+                    Intent intent = new Intent(context, CourseDetails.class);
+                    intent.putExtra(COURSEIDKEY, crse.getId());
+                    context.startActivity(intent);
                 });
-
-                holder.courseFab.setOnClickListener(v -> {
-                    Intent intent = new Intent(mContext, CourseEditActivity.class);
-                    intent.putExtra(COURSE_ID_KEY, course.getId());
-                    mContext.startActivity(intent);
+                holdr.courseFab.setOnClickListener(v -> {
+                    Intent intent = new Intent(context, CourseEdit.class);
+                    intent.putExtra(COURSEIDKEY, crse.getId());
+                    context.startActivity(intent);
                 });
                 break;
             case CHILD:
-                holder.courseFab.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_delete));
-                holder.courseFab.setOnClickListener(v -> {
-                    if(courseSelectedListener != null){
-                        courseSelectedListener.onCourseSelected(position, course);
+                holdr.courseFab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_delete_black_24dp));
+                holdr.courseFab.setOnClickListener(v -> {
+                    if(cSelectedListener != null){
+                        cSelectedListener.onCSelected(posit, crse);
                     }
                 });
                 break;
