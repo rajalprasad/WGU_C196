@@ -16,12 +16,9 @@ import com.example.wgu_c196.utilities.TextFormatter;
 import com.example.wgu_c196.view.CourseDetails;
 import com.example.wgu_c196.view.CourseEdit;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 import static com.example.wgu_c196.utilities.Constants.COURSEIDKEY;
 
 public class CAdapter extends RecyclerView.Adapter<CAdapter.VHolder> {
