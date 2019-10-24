@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".view.CourseDetails">
-
     <TextView
         android:id="@+id/course_details_start_date_label"
         android:layout_width="@dimen/details_label_width"
@@ -16,7 +15,6 @@
         android:textSize="@dimen/text_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/course_details_start_date"
         android:layout_width="0dp"
@@ -27,7 +25,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/course_details_start_date_label"
         app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/course_details_end_date_label"
         android:layout_width="@dimen/details_label_width"
@@ -37,7 +34,6 @@
         android:textSize="@dimen/text_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/course_details_start_date_label" />
-
     <TextView
         android:id="@+id/course_details_end_date"
         android:layout_width="0dp"
@@ -49,7 +45,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/course_details_end_date_label"
         app:layout_constraintTop_toBottomOf="@+id/course_details_start_date" />
-
     <TextView
         android:id="@+id/course_details_status_label"
         android:layout_width="@dimen/details_label_width"
@@ -59,7 +54,6 @@
         android:textSize="@dimen/text_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/course_details_end_date_label" />
-
     <TextView
         android:id="@+id/course_details_status"
         android:layout_width="0dp"
@@ -70,7 +64,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/course_details_status_label"
         app:layout_constraintTop_toBottomOf="@+id/course_details_end_date" />
-
     <TextView
         android:id="@+id/course_details_notes_label"
         android:layout_width="@dimen/details_label_width"
@@ -80,7 +73,6 @@
         android:textSize="@dimen/text_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/course_details_status_label" />
-
     <TextView
         android:id="@+id/course_details_notes"
         android:layout_width="0dp"
@@ -93,24 +85,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/course_details_notes_label"
         app:layout_constraintTop_toBottomOf="@+id/course_details_status" />
-
     <TextView
         android:id="@+id/course_details_assess_label"
         android:layout_width="293dp"
         android:layout_height="56dp"
-        android:layout_margin="@dimen/text_margin"
         android:layout_marginTop="16dp"
         android:text="Assessments"
         android:textSize="30sp"
         app:layout_constraintEnd_toStartOf="@id/course_details_fab_add_assess"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/course_details_notes" />
+        app:layout_constraintTop_toBottomOf="@+id/course_details_share_fab" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/course_details_fab_add_assess"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:layout_marginTop="64dp"
         android:src="@drawable/ic_add_black_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/course_details_assess_label"
@@ -128,7 +118,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/course_details_assess_label" />
-
     <TextView
         android:id="@+id/course_details_mentors_label"
         android:layout_width="180dp"
@@ -142,7 +131,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/course_details_assessments_list" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/course_details_fab_add_mentor"
         android:layout_width="wrap_content"
@@ -151,7 +139,6 @@
         android:src="@drawable/ic_add_black_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/course_details_assessments_list" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/course_details_mentors_list"
         android:layout_width="0dp"
@@ -165,6 +152,13 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/course_details_mentors_label" />
-
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/course_details_share_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        app:fabSize="mini"
+        android:src="@android:drawable/ic_menu_share"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/course_details_notes_label"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

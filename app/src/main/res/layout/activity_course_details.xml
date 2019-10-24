@@ -11,11 +11,13 @@
         android:layout_height="match_parent"
         android:fillViewport="true"/>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/activity_course_details_edit_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_edit_black_24dp"
         app:layout_anchorGravity="top|end"
         android:layout_margin="@dimen/text_margin"
+        app:fabSize="mini"
         android:layout_gravity="top|right"/>
     <include layout="@layout/content_course_details"/>
 
