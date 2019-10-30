@@ -1,6 +1,7 @@
 package com.example.wgu_c196.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
@@ -10,6 +11,9 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.os.TestLooperManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -25,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,6 +58,11 @@ public class TermEdit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_edit);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_check_black_24dp);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.bind(this);
 
@@ -128,8 +138,26 @@ public class TermEdit extends AppCompatActivity {
         super.onSaveInstanceState(oState);
     }
     @Override
+    public boolean onOptionsItemSelected(MenuItem itm) {
+        if(itm.getItemId() == android.R.id.home) {
+            saveNdRetrn();
+            return true;
+        } else if (itm.getItemId() == R.id.edit_menu_delete_button) {
+            handleDel();
+        }
+        return super.onOptionsItemSelected(itm);
+    }
+    @Override
     public void onBackPressed() {
         saveNdRetrn();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menus) {
+        if(!newTerm) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.edit_menu, menus);
+        }
+        return super.onCreateOptionsMenu(menus);
     }
     private void saveNdRetrn() {
         try {
@@ -137,7 +165,7 @@ public class TermEdit extends AppCompatActivity {
             Date eDate = TextFormatter.fulDateFrmat.parse(TermEndDate.getText().toString());
             eViewModel.savTerm(TermTitle.getText().toString(), sDate, eDate);
         } catch (ParseException e) {
-            Log.v("Exception", e.getLocalizedMessage());
+            System.out.println(e.getLocalizedMessage());
         }
         finish();
     }

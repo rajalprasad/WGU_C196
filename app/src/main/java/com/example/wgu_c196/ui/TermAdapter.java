@@ -70,8 +70,6 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.VHolder> {
                 holder.tFab.setImageDrawable(ContextCompat.getDrawable(cContext, R.drawable.ic_delete_black_24dp));
                 break;
         }
-
-
     }
 
     @Override

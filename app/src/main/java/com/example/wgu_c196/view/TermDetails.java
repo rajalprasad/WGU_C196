@@ -45,19 +45,19 @@ public class TermDetails extends AppCompatActivity implements CAdapter.CSelected
 
     private List<mCourse> cData = new ArrayList<>();
     private List<mCourse> UACourses = new ArrayList<>();
-    private Toolbar toolbar;
     private int tId;
     private CAdapter crseAdapter;
     private EViewModel eViewModel;
+    private Toolbar tbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_details);
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         ButterKnife.bind(this);
         initRecyclerView();
+        tbar = findViewById(R.id.toolbar);
+        setSupportActionBar(tbar);
         initViewModel();
     }
     private void initViewModel() {
@@ -66,7 +66,7 @@ public class TermDetails extends AppCompatActivity implements CAdapter.CSelected
         eViewModel.MLDTerm.observe(this, trm -> {
             textViewTermStartDate.setText(TextFormatter.fulDateFrmat.format(trm.getStrtDate()));
             textViewTermsEndDate.setText(TextFormatter.fulDateFrmat.format(trm.getEndDate()));
-            toolbar.setTitle(trm.getTitle());
+            tbar.setTitle(trm.getTitle());
         });
         final Observer<List<mCourse>> crseObserver =
                 crseEntities -> {

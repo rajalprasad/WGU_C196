@@ -1,6 +1,7 @@
 package com.example.wgu_c196.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -43,13 +44,9 @@ public class Term extends AppCompatActivity {
         ButterKnife.bind(this);
         initRecyclerView();
         initViewModel();
+        Toolbar tbar = findViewById(R.id.toolbar);
+        setSupportActionBar(tbar);
     }
-    private void initRecyclerView() {
-        tRecyclerView.setHasFixedSize(true);
-        LinearLayoutManager lManager = new LinearLayoutManager(this);
-        tRecyclerView.setLayoutManager(lManager);
-    }
-
     private void initViewModel() {
         final Observer<List<mTerm>> tObserver =
                 tEntities -> {
@@ -66,4 +63,10 @@ public class Term extends AppCompatActivity {
         TVModel = ViewModelProviders.of(this).get(TViewModel.class);
         TVModel.Terms.observe(this, tObserver);
     }
+    private void initRecyclerView() {
+        tRecyclerView.setHasFixedSize(true);
+        LinearLayoutManager lManager = new LinearLayoutManager(this);
+        tRecyclerView.setLayoutManager(lManager);
+    }
+
 }

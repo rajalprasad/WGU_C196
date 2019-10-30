@@ -68,8 +68,6 @@ public class CourseDetails extends AppCompatActivity implements AAdapter.ASelect
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_details);
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         ButterKnife.bind(this);
         initRecyclerView();
         initViewModel();

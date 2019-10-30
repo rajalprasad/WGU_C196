@@ -3,11 +3,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.Course">
-
-
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/activity_course_main_app_bar"
+        android:theme="@style/Theme.MaterialComponents"
+        android:background="@color/colorPrimary">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_collapseMode="pin"
+            app:popupTheme="@style/AppTheme.AppBarOverlay"
+            app:title="Courses">
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/course_fab"
         android:layout_width="wrap_content"
@@ -15,7 +29,5 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/text_margin"
         android:src="@drawable/ic_add_black_24dp"/>
-
-    <include layout="@layout/content_course_main"/>
-
+    <include layout="@layout/content_course_main" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

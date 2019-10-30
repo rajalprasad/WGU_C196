@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -36,39 +35,28 @@ import static com.example.wgu_c196.utilities.Constants.TERMIDKEY;
 public class CourseEdit extends AppCompatActivity {
     @BindView(R.id._course_edit_title)
     EditText editTextCourseTitle;
-
     @BindView(R.id.course_edit_start_date)
     EditText editTextCourseStartDate;
-
     @BindView(R.id.course_edit_end_date)
     EditText editTextCourseEndDate;
-
     @BindView(R.id.course_edit_start_date_button)
     ImageButton imageButtonCourseStartDate;
-
     @BindView(R.id.course_edit_end_date_button)
     ImageButton imageButtonCourseEndDate;
-
     @BindView(R.id.course_edit_status_dropdown)
     Spinner spinnerCourseStatus;
-
     @BindView(R.id.course_edit_notes)
     EditText editTextEditCourseNotes;
-
     private EViewModel eViewModel;
     private boolean bNCourse, bEdit;
     private int tId = -1;
     private ArrayAdapter<mCourseStat> crseStatAdapter;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_course_edit);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_check_black_24dp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -80,15 +68,6 @@ public class CourseEdit extends AppCompatActivity {
         initViewModel();
         addSpinItms();
     }
-    private void addSpinItms() {
-        crseStatAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mCourseStat.values());
-        spinnerCourseStatus.setAdapter(crseStatAdapter);
-    }
-
-    private mCourseStat getSpinVal() {
-        return (mCourseStat) spinnerCourseStatus.getSelectedItem();
-    }
-
     private void initViewModel() {
         eViewModel = ViewModelProviders.of(this).get(EViewModel.class);
 
@@ -99,7 +78,7 @@ public class CourseEdit extends AppCompatActivity {
                 editTextCourseEndDate.setText(TextFormatter.fulDateFrmat.format(course.getEndDate()));
                 editTextEditCourseNotes.setText(course.getNote());
                 int position = getSpinPosition(course.getCrseStat());
-                editTextEditCourseNotes.setSelection(position);
+                spinnerCourseStatus.setSelection(position);
             }
         });
         Bundle xtras  = getIntent().getExtras();
@@ -115,78 +94,78 @@ public class CourseEdit extends AppCompatActivity {
             eViewModel.LCourseData(cId);
         }
     }
+    private void addSpinItms() {
+        crseStatAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mCourseStat.values());
+        spinnerCourseStatus.setAdapter(crseStatAdapter);
+    }
+    private mCourseStat getSpinVal() {
+        return (mCourseStat) spinnerCourseStatus.getSelectedItem();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menus) {
         if(!bNCourse) {
             MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.course_edit_menu, menus);
+            inflater.inflate(R.menu.edit_menu, menus);
         }
         return super.onCreateOptionsMenu(menus);
     }
+    @OnClick(R.id.course_edit_start_date_button)
+    public void crseStrtDatePick() {
+        final Calendar mCal = Calendar.getInstance();
+        DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
+            mCal.set(Calendar.YEAR, year);
+            mCal.set(Calendar.MONTH, monthOfYear);
+            mCal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
+            editTextCourseStartDate.setText(TextFormatter.fulDateFrmat.format(mCal.getTime()));
+        };
+        new DatePickerDialog(this, date, mCal.get(Calendar.YEAR), mCal.get(Calendar.MONTH), mCal.get(Calendar.DAY_OF_MONTH)).show();
+    }
+    @OnClick(R.id.course_edit_end_date_button)
+    public void crseEndDatePick() {
+        final Calendar mCal = Calendar.getInstance();
+        DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
+            mCal.set(Calendar.YEAR, year);
+            mCal.set(Calendar.MONTH, monthOfYear);
+            mCal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+            editTextCourseEndDate.setText(TextFormatter.fulDateFrmat.format(mCal.getTime()));
+        };
+        new DatePickerDialog(this, date, mCal.get(Calendar.YEAR), mCal.get(Calendar.MONTH), mCal.get(Calendar.DAY_OF_MONTH)).show();
+    }
     private int getSpinPosition(mCourseStat crseStat) {
         return crseStatAdapter.getPosition(crseStat);
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem itm) {
         if(itm.getItemId() == android.R.id.home) {
-            saveAndReturn();
+            savAndRetrn();
             return true;
-        } else if(itm.getItemId() == R.id.course_edit_menu_delete) {
-            mViewModel.deleteCourse();
+        } else if(itm.getItemId() == R.id.edit_menu_delete_button) {
+            eViewModel.delCourse();
             finish();
         }
         return super.onOptionsItemSelected(itm);
     }
-
     @Override
     public void onBackPressed() {
-        saveAndReturn();
+        savAndRetrn();
     }
 
-    public void saveAndReturn() {
+    public void savAndRetrn() {
         try {
-            Date startDate = TextFormatting.fullDateFormat.parse(tvCourseStartDate.getText().toString());
-            Date endDate = TextFormatting.fullDateFormat.parse(tvCourseEndDate.getText().toString());
-            mViewModel.saveCourse(tvCourseTitle.getText().toString(), startDate, endDate, getSpinVal(), termId, tvNote.getText().toString());
-            Log.v("Saved Course", tvCourseTitle.toString());
+            Date strtDate = TextFormatter.fulDateFrmat.parse(editTextCourseStartDate.getText().toString());
+            Date eDate = TextFormatter.fulDateFrmat.parse(editTextCourseEndDate.getText().toString());
+            eViewModel.savCourse(editTextCourseTitle.getText().toString(), strtDate, eDate, getSpinVal(), tId, editTextEditCourseNotes.getText().toString());
         } catch (ParseException e) {
-            Log.v("Exception", e.getLocalizedMessage());
+            System.out.println(e.getLocalizedMessage());
         }
         finish();
     }
-
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putBoolean(EDITING_KEY, true);
-        super.onSaveInstanceState(outState);
-    }
-
-    @OnClick(R.id.course_edit_start_btn)
-    public void courseStartDatePicker() {
-        final Calendar myCalendar = Calendar.getInstance();
-        DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
-            myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, monthOfYear);
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
-            tvCourseStartDate.setText(TextFormatting.fullDateFormat.format(myCalendar.getTime()));
-        };
-        new DatePickerDialog(this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-    }
-
-    @OnClick(R.id.course_edit_end_btn)
-    public void courseEndDatePicker() {
-        final Calendar myCalendar = Calendar.getInstance();
-        DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
-            myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, monthOfYear);
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
-            tvCourseEndDate.setText(TextFormatting.fullDateFormat.format(myCalendar.getTime()));
-        };
-        new DatePickerDialog(this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+    protected void onSaveInstanceState(Bundle oState) {
+        oState.putBoolean(EDITINGKEY, true);
+        super.onSaveInstanceState(oState);
     }
 }
