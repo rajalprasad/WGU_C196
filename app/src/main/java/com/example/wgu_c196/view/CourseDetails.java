@@ -62,13 +62,15 @@ public class CourseDetails extends AppCompatActivity implements AAdapter.ASelect
     private MAdapter mentrAdapter;
     private EViewModel eViewModel;
     private List<mMentor> UAMentors = new ArrayList<>();
-    private Toolbar toolbar;
+    private Toolbar tbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_details);
         ButterKnife.bind(this);
+        tbar = findViewById(R.id.toolbar);
+        setSupportActionBar(tbar);
         initRecyclerView();
         initViewModel();
     }
@@ -95,7 +97,7 @@ public class CourseDetails extends AppCompatActivity implements AAdapter.ASelect
             textViewCourseEndDate.setText(TextFormatter.fulDateFrmat.format(crse.getEndDate()));
             textViewCourseDetailsStatus.setText(crse.getCrseStat().toString());
             textViewCourseDetailsNotes.setText(crse.getNote());
-            toolbar.setTitle(crse.getTitle());
+            tbar.setTitle(crse.getTitle());
         });
         final Observer<List<mAssessment>> assessObserver =
                 assessEntities -> {
@@ -180,7 +182,7 @@ public class CourseDetails extends AppCompatActivity implements AAdapter.ASelect
                     eViewModel.ovrWrAssess(assess, cId);
                 });
             } else {
-                Toast.makeText(getApplicationContext(), "Nno unassigned assessments. Create a new assessment.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "No unassigned assessments. Create a new assessment.", Toast.LENGTH_SHORT).show();
             }
         });
         AlertDialog dialog = blder.create();

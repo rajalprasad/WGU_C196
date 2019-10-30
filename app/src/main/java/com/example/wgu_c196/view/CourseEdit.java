@@ -57,6 +57,9 @@ public class CourseEdit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_course_edit);
+
+        Toolbar tbar = findViewById(R.id.toolbar);
+        setSupportActionBar(tbar);
         Objects.requireNonNull(getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_check_black_24dp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
