@@ -26,7 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:layout_collapseMode="pin"
-            app:popupTheme="@style/AppTheme.AppBarOverlay">
+            app:popupTheme="@style/AppTheme.AppBarOverlay"
+            app:title="Assessments">
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
     <include layout="@layout/content_assess_main" />
