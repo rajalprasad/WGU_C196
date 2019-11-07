@@ -168,4 +168,7 @@ public class EViewModel extends AndroidViewModel {
     public void delAssess() {
         Repo.delAssess(MLDAssess.getValue());
     }
+    public void delMentor() {
+        Repo.delMentor(MLDMentor.getValue());
+    }
 }

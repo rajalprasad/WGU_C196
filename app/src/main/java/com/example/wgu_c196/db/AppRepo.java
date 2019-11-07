@@ -76,6 +76,9 @@ public class AppRepo {
     public void delAssess(final mAssessment assess) {
         exe.execute(() -> Db.aDao().delAssess(assess));
     }
+    public void delMentor(final mMentor mentor) {
+        exe.execute(() -> Db.mDao().delMentor(mentor));
+    }
     public LiveData<List<mCourse>> gCoursesByTrm(final int tId) {
         return Db.cDao().gCoursesByTrm(tId);
     }

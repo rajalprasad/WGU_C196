@@ -55,7 +55,7 @@ public class MentorEdit extends AppCompatActivity {
             savAndRetrn();
             return true;
         } else if(itm.getItemId() == R.id.edit_menu_delete_button) {
-            eViewModel.delAssess();
+            eViewModel.delMentor();
             finish();
         }
         return super.onOptionsItemSelected(itm);
