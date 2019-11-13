@@ -87,45 +87,68 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     //TODO
-    private void handlAlrts() {
-        ArrayList<String> alrts = new ArrayList<>();
-        for(mCourse crse: cData) {
-            if(DateUtils.isToday(crse.getStrtDate().getTime())) {
-                alrts.add("Course " + crse.getTitle() + " will begin today..");
-            } else if(DateUtils.isToday(crse.getEndDate().getTime())) {
-                alrts.add("Course " + crse.getTitle() + " will end today..");
-            }
-        }
-        for(mAssessment assess: assessData) {
-            if(DateUtils.isToday(assess.getDate().getTime())) {
-                alrts.add("The assessment: " + assess.getTitle() + ", is due today..");
-            }
-        }
-        if(alrts.size() > 0) {
-            for(String alert: alrts) {
-                AlarmManager alarm = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
-                Alrting alrting = new Alrting();
-                IntentFilter filtr = new IntentFilter("ALARM_ACTION");
-                registerReceiver(alrting, filtr);
-                Intent intent = new Intent("ALARM_ACTION");
-                intent.putExtra("param", alert);
-                PendingIntent opration = PendingIntent.getBroadcast(this, 0, intent, 0);
-                alarm.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+ Toast.LENGTH_SHORT, opration);
+    private void handleCourseAlerts() {
+        //ArrayList<String> alrts = new ArrayList<>();
+        for (mCourse crse : cData) {
+            if (DateUtils.isToday(crse.getStrtDate().getTime())) {
+                //alrts.add("Course " + crse.getTitle() + " will begin today..");
+
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Course " + crse.getTitle() + " will begin today..",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+
+            } else if (DateUtils.isToday(crse.getEndDate().getTime())) {
+                //alrts.add("Course " + crse.getTitle() + " will end today..");
+
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Course " + crse.getTitle() + " will end today..",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+
             }
         }
     }
+    private void handleAssessAlerts() {
+
+        for (mAssessment assess : assessData) {
+            if (DateUtils.isToday(assess.getDate().getTime())) {
+                //alrts.add("The assessment: " + assess.getTitle() + ", is due today..");
+
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "The assessment: " + assess.getTitle() + ", is due today..",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        }
+    }
+
+//        if(alrts.size() > 0) {
+//            for(String alert: alrts) {
+//
+////                AlarmManager alarm = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+////                Alrting alrting = new Alrting();
+////                IntentFilter filtr = new IntentFilter("ALARM_ACTION");
+////                registerReceiver(alrting, filtr);
+////                Intent intent = new Intent("ALARM_ACTION");
+////                intent.putExtra("param", alert);
+////                PendingIntent opration = PendingIntent.getBroadcast(this, 0, intent, 0);
+////                alarm.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+ Toast.LENGTH_SHORT, opration);
+//            }
+//        }
+
     private void initViewModel() {
         final Observer<List<mCourse>> crseObserver =
                 crseEntities -> {
                     cData.clear();
                     cData.addAll(crseEntities);
-                    handlAlrts();
+                    handleCourseAlerts();
                 };
         final Observer<List<mAssessment>> assessObserver =
                 assessEntities -> {
                     assessData.clear();
                     assessData.addAll(assessEntities);
-                    handlAlrts();
+                    handleAssessAlerts();
                 };
         mainVModel = ViewModelProviders.of(this).get(MainVModel.class);
         mainVModel.assess.observe(this, assessObserver);

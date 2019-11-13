@@ -83,7 +83,7 @@ public class EViewModel extends AndroidViewModel {
             if (TextUtils.isEmpty(cTitle.trim())) {
                 return;
             }
-            course = new mCourse(cTitle.trim(), sDate, eDate, courseStat, tId);
+            course = new mCourse(cTitle.trim(), sDate, eDate, courseStat, tId, note);
         } else {
             course.setTitle(cTitle.trim());
             course.setStrtDate(sDate);

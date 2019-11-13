@@ -86,11 +86,11 @@ public class CourseEdit extends AppCompatActivity {
         });
         Bundle xtras  = getIntent().getExtras();
         if(xtras == null) {
-            setTitle("New course");
+            setTitle("New course1");
             bNCourse = true;
         } else if (xtras.containsKey(TERMIDKEY)){
             tId = xtras.getInt(TERMIDKEY);
-            setTitle("New course");
+            setTitle("New course2");
         } else {
             setTitle("Edit Course");
             int cId = xtras.getInt(COURSEIDKEY);

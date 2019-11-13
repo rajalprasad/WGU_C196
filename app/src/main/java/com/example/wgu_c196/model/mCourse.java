@@ -83,12 +83,13 @@ public class mCourse {
     }
 
     @Ignore
-    public mCourse(String title, Date strtDate, Date endDate, mCourseStat crseStat, int trmID) {
+    public mCourse(String title, Date strtDate, Date endDate, mCourseStat crseStat, int trmID, String note) {
         this.title = title;
         this.strtDate = strtDate;
         this.endDate = endDate;
         this.crseStat = crseStat;
         this.trmID = trmID;
+        this.note = note;
     }
     @Ignore
     public mCourse(int id, String title, Date strtDate, Date endDate, mCourseStat crseStat, String note, int trmID) {
